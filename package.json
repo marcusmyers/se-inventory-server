@@ -12,7 +12,8 @@
     "jsonfile": "^2.0.0",
     "express": "^4.10.4",
     "jade": "*",
-    "serial-number": "0.3.0"
+    "serial-number": "0.3.0",
+    "sqlite3": "*"
   },
   "bin": "./se-inventory.js",
   "preferGlobal": true
