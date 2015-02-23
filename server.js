@@ -1,12 +1,13 @@
 var http = require('http');
 var os   = require('os');
 var jf   = require('jsonfile');
+var fs   = require('fs');
 var express = require('express');
 var serialNumber = require('serial-number');
 var app  = express();
 
 var conffile = './config/server.json';
-var datafile = './data/db.json';
+var datafile = './data/se.db';
 
 // Read in config file
 var config = jf.readFileSync(conffile);
