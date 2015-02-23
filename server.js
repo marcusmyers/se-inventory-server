@@ -11,10 +11,10 @@ var datafile = './data/db.json';
 // Read in config file
 var config = jf.readFileSync(conffile);
 // Read Data file
-var db = jf.readFileSync(datafile);
+//var db = jf.readFileSync(datafile);
 
 // Write data to the db.json for inventory
-jf.writeFileSync('./data/db.json', db);
+//jf.writeFileSync('./data/db.json', db);
 
 // Set views folder
 app.set('views', __dirname + '/views');
