@@ -13,23 +13,7 @@ var bodyparser   = require('body-parser');
 
 // Read in config file
 var config = jf.readFileSync(conffile);
-// Verify database file is present
-// var exists = fs.existsSync(datafile);
 
-// // Create db file if it does not exist
-// if(!exists) {
-//   console.log("Creating DB file.");
-//   fs.openSync(datafile, "w");
-// }
-//
-// var db = new sqlite3.Database(datafile);
-//
-// db.serialize( function(){
-//   if(!exists){
-//     db.run("CREATE TABLE inv(id INTEGER PRIMARY KEY AUTOINCREMENT, tag TEXT NOT NULL, serial TEXT NOT NULL, hostname TEXT NOT NULL, location TEXT, laptop INTEGER DEFAULT 0, os_version TEXT, memory TEXT, cpu TEXT, cost TEXT, po TEXT)")
-//   }
-// });
-// db.close();
 
 // Set views folder
 app.set('views', __dirname + '/views');
@@ -50,7 +34,12 @@ router.post('/add', bodyparser.json(), function(req, res, next){
     serial: req.param('serial'),
     location: req.param('location'),
     hostname: req.param('hostname'),
-    laptop: req.param('laptop')
+    laptop: req.param('laptop'),
+    os_version: req.param('os_version'),
+    memory: req.param('memory'),
+    cpu: req.param('cpu'),
+    po: req.param('po'),
+    cost: req.param('cost')
   }).then(function(invs){
     res.sendStatus(200);
     console.log(invs);

@@ -5,10 +5,11 @@ module.exports = function(sequelize, DataTypes) {
     serial: DataTypes.STRING,
     hostname: DataTypes.STRING,
     location: DataTypes.STRING,
-    laptop: DataTypes.INTEGER,
+    laptop: DataTypes.BOOLEAN,
     os_version: DataTypes.STRING,
     cpu: DataTypes.STRING,
-    cost: DataTypes.STRING,
+    memory: DataTypes.STRING,
+    cost: DataTypes.DECIMAL(10,2),
     po: DataTypes.INTEGER
   }, {
     classMethods: {
