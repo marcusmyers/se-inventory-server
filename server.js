@@ -6,21 +6,21 @@ var express      = require('express');
 var serialNumber = require('serial-number');
 var app          = express();
 var conffile     = './config/server.json';
-var datafile     = './data/se.db';
+// var datafile     = './data/se.sqlite';
 var models       = require('./models');
-var sqlite3      = require('sqlite3').verbose();
+var mysql      = require('mysql');
 var bodyparser   = require('body-parser');
 
 // Read in config file
 var config = jf.readFileSync(conffile);
 // Verify database file is present
-var exists = fs.existsSync(datafile);
+// var exists = fs.existsSync(datafile);
 
 // // Create db file if it does not exist
-if(!exists) {
-  console.log("Creating DB file.");
-  fs.openSync(datafile, "w");
-}
+// if(!exists) {
+//   console.log("Creating DB file.");
+//   fs.openSync(datafile, "w");
+// }
 //
 // var db = new sqlite3.Database(datafile);
 //

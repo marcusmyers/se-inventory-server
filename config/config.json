@@ -2,22 +2,22 @@
   "development": {
     "username": "root",
     "password": null,
-    "database": "se_dev",
-    "dialect": "sqlite",
-    "storage": "../data/se_dev.sqlite"
+    "database": "se-inventory",
+    "dialect": "mysql",
+    "host": "localhost"
   },
   "test": {
     "username": "root",
     "password": null,
-    "database": "se_test",
-    "dialect": "sqlite",
-    "storage": "../data/se_test.sqlite"
+    "database": "se-inventory",
+    "dialect": "mysql",
+    "host": "localhost"
   },
   "production": {
     "username": "root",
     "password": null,
-    "database": "se",
-    "dialect": "sqlite",
-    "storage": "../data/se.sqlite"
+    "database": "se-inventory",
+    "dialect": "mysql",
+    "host": "localhost"
   }
 }
