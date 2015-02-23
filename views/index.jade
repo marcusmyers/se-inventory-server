@@ -1,6 +1,6 @@
 extend layout
 block content
-  h1 #{data.hostname}
+  h1 #{title}
   table.table
     thead
       tr
@@ -17,16 +17,17 @@ block content
         th
           | CPU
     tbody
+    each inv in data
       tr
         td
-          | #{data.tag}
+          | #{inv.tag}
         td
-          | #{data.serial}
+          | #{inv.serial}
         td
-          | #{data.location.building} - #{data.location.room}
+          | #{inv.location}
         td
-          | #{data.os_version}
+          | #{inv.os_version}
         td
-          | #{data.memory}
+          | #{inv.memory}
         td
-          | #{data.cpu}
+          | #{inv.cpu}

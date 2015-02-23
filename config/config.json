@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "root",
+    "password": null,
+    "database": "se_dev",
+    "dialect": "sqlite",
+    "storage": "../data/se_dev.sqlite"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "se_test",
+    "dialect": "sqlite",
+    "storage": "../data/se_test.sqlite"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "se",
+    "dialect": "sqlite",
+    "storage": "../data/se.sqlite"
+  }
+}
