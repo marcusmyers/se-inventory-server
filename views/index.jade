@@ -7,6 +7,8 @@ block content
         th
           | Inventory Tag
         th
+          | Hostname
+        th
           | Serial
         th
           | Location
@@ -15,12 +17,14 @@ block content
         th
           | Memory
         th
-          | CPU
+          | Update
     tbody
     each inv in data
       tr
         td
           | #{inv.tag}
+        td
+          | #{inv.hostname}
         td
           | #{inv.serial}
         td
@@ -30,4 +34,4 @@ block content
         td
           | #{inv.memory}
         td
-          | #{inv.cpu}
+          a(href='http://#{inv.ip}:3737/edit', target='_new', class='glyphicon glyphicon-pencil', alt="Update") 

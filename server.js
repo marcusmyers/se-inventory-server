@@ -8,7 +8,7 @@ var app          = express();
 var conffile     = './config/server.json';
 // var datafile     = './data/se.sqlite';
 var models       = require('./models');
-var mysql      = require('mysql');
+var mysql        = require('mysql');
 var bodyparser   = require('body-parser');
 
 // Read in config file
@@ -28,6 +28,7 @@ app.use(express.static(__dirname + '/public'));
 // =============================================================================
 var router = express.Router(); 				// get an instance of the express Router
 
+// Is this needed?
 router.post('/add', bodyparser.json(), function(req, res, next){
   models.Inv.create({
     tag: req.param('tag'),
@@ -39,10 +40,10 @@ router.post('/add', bodyparser.json(), function(req, res, next){
     memory: req.param('memory'),
     cpu: req.param('cpu'),
     po: req.param('po'),
-    cost: req.param('cost')
+    cost: req.param('cost'),
+    ip: req.param('ip'),
   }).then(function(invs){
     res.sendStatus(200);
-    console.log(invs);
   });
 });
 
@@ -65,6 +66,8 @@ app.get('/', function(req, res) {
 // all of our routes will be prefixed with /api
 app.use('/api', router);
 
+var clients = {};
+
 models.sequelize.sync().then(function(){
   var server = app.listen(config.port, function () {
 
@@ -73,5 +76,40 @@ models.sequelize.sync().then(function(){
 
     console.log('Example app listening at http://%s:%s', host, port)
 
+  });
+  var io  = require('socket.io')(server);
+
+  io.on('connection', function(socket){
+    clients[socket.id] = socket;
+    socket.on('inv-message', function (data){
+      models.Inv.findOrCreate({ where: { hostname: data.hostname }, defaults: {
+        tag: data.tag,
+        serial: data.serial,
+        location: data.location.building + "-" + data.location.room,
+        hostname: data.hostname,
+        laptop: data.laptop,
+        os_version: data.os_version,
+        memory: data.memory,
+        cpu: data.cpu,
+        po: data.po,
+        cost: data.cost,
+        ip: data.ip,
+      } }).spread(function(inv, created){
+        if(!created){
+          inv.tag = data.tag;
+          inv.serial = data.serial;
+          inv.location = data.location.building + "-" + data.location.room;
+          inv.hostname = data.hostname;
+          inv.laptop = data.laptop;
+          inv.os_version = data.os_version;
+          inv.memory = data.memory;
+          inv.cpu = data.cpu;
+          inv.po = data.po;
+          inv.cost = data.cost;
+          inv.ip = data.ip;
+          inv.save().then(function(){});
+        }
+      });
+    });
   });
 });

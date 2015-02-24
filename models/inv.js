@@ -10,7 +10,8 @@ module.exports = function(sequelize, DataTypes) {
     cpu: DataTypes.STRING,
     memory: DataTypes.STRING,
     cost: DataTypes.DECIMAL(10,2),
-    po: DataTypes.INTEGER
+    po: DataTypes.INTEGER,
+    ip: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {
